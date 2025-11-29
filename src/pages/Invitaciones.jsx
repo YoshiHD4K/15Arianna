@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react'
 import '../assets/css/admin.css'
 import { useToast } from '../context/ToastContext'
 import { supabase } from '../lib/supabase'
+import { logout } from '../utils/auth'
+import { useNavigate } from 'react-router-dom'
 
 export default function Invitaciones() {
   const [rows, setRows] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const toast = useToast()
+  const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false)
   const [theme, setTheme] = useState(() => {
     try {
@@ -89,19 +92,29 @@ export default function Invitaciones() {
     window.open(url, '_blank', 'noopener')
   }
 
+  async function handleLogout() {
+    await logout()
+    navigate('/admin')
+  }
+
   return (
     <main className="admin-page">
       <div className="admin-card">
         <div className="admin-header">
-          <h1 style={{display:'flex',alignItems:'center',gap:12}}>
-            Invitaciones
-            <button className="icon-btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} title="Alternar tema" aria-label="Alternar tema">
-              {theme === 'dark' ? (
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.8 1.8-1.8zM1 13h3v-2H1v2zm10 9h2v-3h-2v3zM17.24 4.84l1.8-1.79 1.79 1.79-1.79 1.79-1.8-1.79zM20 11v2h3v-2h-3zM6.76 19.16l-1.8 1.79L3.17 19.16l1.79-1.8 1.8 1.8zM17.24 19.16l1.8 1.79 1.79-1.79-1.79-1.8-1.8 1.8zM12 5a7 7 0 100 14 7 7 0 000-14z" fill="currentColor"/></svg>
-              ) : (
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.64 13a9 9 0 11-10.63-10.63A7 7 0 0021.64 13z" fill="currentColor"/></svg>
-              )}
-            </button>
+          <h1 style={{display:'flex',alignItems:'center',gap:12, flexWrap: 'wrap'}}>
+            <span style={{flex: 1}}>Invitaciones</span>
+            <div style={{display:'flex', gap: 8}}>
+              <button className="icon-btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} title="Alternar tema" aria-label="Alternar tema">
+                {theme === 'dark' ? (
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.8 1.8-1.8zM1 13h3v-2H1v2zm10 9h2v-3h-2v3zM17.24 4.84l1.8-1.79 1.79 1.79-1.79 1.79-1.8-1.79zM20 11v2h3v-2h-3zM6.76 19.16l-1.8 1.79L3.17 19.16l1.79-1.8 1.8 1.8zM17.24 19.16l1.8 1.79 1.79-1.79-1.79-1.8-1.8 1.8zM12 5a7 7 0 100 14 7 7 0 000-14z" fill="currentColor"/></svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.64 13a9 9 0 11-10.63-10.63A7 7 0 0021.64 13z" fill="currentColor"/></svg>
+                )}
+              </button>
+              <button className="icon-btn" onClick={handleLogout} title="Cerrar sesión" aria-label="Cerrar sesión">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              </button>
+            </div>
           </h1>
           <p className="meta">Lista de invitados</p>
         </div>

@@ -120,8 +120,8 @@ export default function Admin() {
     <main className="admin-page">
       <div className="admin-card">
         <div className="admin-header">
-          <h1 style={{display:'flex',alignItems:'center',gap:12}}>
-            Panel de administrador
+          <h1 style={{display:'flex',alignItems:'center',gap:12, flexWrap: 'wrap'}}>
+            <span style={{flex: 1}}>Panel de administrador</span>
             <button className="icon-btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} title="Alternar tema" aria-label="Alternar tema">
               {theme === 'dark' ? (
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.8 1.8-1.8zM1 13h3v-2H1v2zm10 9h2v-3h-2v3zM17.24 4.84l1.8-1.79 1.79 1.79-1.79 1.79-1.8-1.79zM20 11v2h3v-2h-3zM6.76 19.16l-1.8 1.79L3.17 19.16l1.79-1.8 1.8 1.8zM17.24 19.16l1.8 1.79 1.79-1.79-1.79-1.8-1.8 1.8zM12 5a7 7 0 100 14 7 7 0 000-14z" fill="currentColor"/></svg>
@@ -130,10 +130,7 @@ export default function Admin() {
               )}
             </button>
           </h1>
-          <p className="meta">Gestión básica — demo</p>
         </div>
-
-        <div className="split">
           <div className="panel">
             {user ? (
               <div className="sessionBox">
@@ -196,17 +193,7 @@ export default function Admin() {
               </>
             )}
           </div>
-
-          <aside className="panel">
-            <h3 style={{marginTop:0}}>Información</h3>
-            <p className="small">Esta sección está pensada para un demo local. Los datos se guardan en <code>localStorage</code>. Para producción integra un backend y hashing seguro.</p>
-            <hr />
-            <p className="small"><strong>Estado:</strong> {isAuthenticated() ? 'Autenticado' : 'Desconectado'}</p>
-            <p className="small">Administrador registrado: {getAdmin() ? getAdmin().email : 'No'}</p>
-          </aside>
         </div>
-
-      </div>
     </main>
   )
 }
