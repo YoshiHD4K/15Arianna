@@ -305,8 +305,8 @@ html, body, #root {
 /* Esquinas decorativas: usamos la imagen /Esquina.png y la volteamos por esquina */
 .corner-decoration {
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: clamp(80px, 20vw, 200px); /* Responsivo: min 80px, max 200px */
+  height: clamp(80px, 20vw, 200px);
   object-fit: contain;
   pointer-events: none;
   z-index: 6;
@@ -348,8 +348,8 @@ html, body, #root {
 }
 
 .crown-image {
-  width: 180px;
-  max-width: 45vw;
+  width: clamp(120px, 40vw, 180px);
+  max-width: 80vw;
   height: auto;
   filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)) drop-shadow(0 0 6px rgba(212,175,55,0.5));
   animation: crownIn 0.9s ease both;
@@ -358,7 +358,7 @@ html, body, #root {
 }
 
 .lamp-image {
-  width: 140px;
+  width: clamp(100px, 30vw, 140px);
   height: auto;
   margin: 8px auto 0;
   filter: drop-shadow(0 0 6px rgba(212,175,55,0.5)) drop-shadow(0 4px 10px rgba(0,0,0,0.4));
@@ -377,13 +377,14 @@ html, body, #root {
 }
 
 .invitation-name {
-  font-size: 4rem;
+  font-size: clamp(3rem, 10vw, 6.6rem); /* Responsivo: min 3rem, ideal 10vw, max 6.6rem */
   margin: 0;
   font-family: 'ChopinScript', cursive, serif;
   color: var(--inv-gold);
-  letter-spacing: 4px;
+  letter-spacing: clamp(2px, 1vw, 4px);
   text-shadow: 0 0 12px rgba(212,175,55,0.45), 2px 2px 4px rgba(0,0,0,0.6);
   /*animation: nameGlow 4s ease-in-out infinite;*/
+  line-height: 1.1;
 }
 
 /* Divisor decorativo entre título y nombre */
@@ -391,10 +392,10 @@ html, body, #root {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: clamp(10px, 2vw, 20px);
   margin: 10px auto 20px;
   width: 100%;
-  max-width: 450px; /* Más ancho */
+  max-width: clamp(200px, 60vw, 450px); /* Responsivo */
   opacity: 0.9;
 }
 
@@ -438,12 +439,13 @@ html, body, #root {
 }
 
 .guest-name {
-  font-size: 3.5rem;
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
   color: var(--inv-gold);
   margin: 0 0 10px;
   letter-spacing: 1px;
   text-shadow: 0 2px 8px rgba(212,175,55,0.25), 1px 1px 2px rgba(0,0,0,0.6);
   display: inline-block;
+  line-height: 1.2;
 }
 
 .guest-name .companions {
@@ -480,11 +482,14 @@ html, body, #root {
 
 /* Estilos específicos para fecha y hora dentro del texto */
 .event-datetime {
-  font-size: 5rem;
+  font-size: clamp(1.5rem, 4vw, 5rem); /* Ajuste drástico para móviles */
   color: #fff8ee;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: clamp(0.5px, 0.2vw, 1.5px);
+  line-height: 1.3;
+  display: block; /* Asegurar que ocupe su línea si es necesario */
+  margin-top: 10px;
 }
 .event-datetime .event-date {
   font-weight: 700;
@@ -506,11 +511,12 @@ html, body, #root {
 
 .invitation-subtitle {
   font-family: 'Mustika', sans-serif;
-  font-size: 3.8rem;
+  font-size: clamp(2rem, 6vw, 3.8rem);
   color: var(--inv-gold);
-  margin-top: 30px;
+  margin-top: clamp(15px, 4vh, 30px);
   margin-bottom: 15px; /* separar de la lámpara */
   padding-bottom: 6px;
+  line-height: 1.2;
 }
 
 .invitation-footer {
@@ -869,8 +875,15 @@ html, body, #root {
   50% { filter: brightness(1.5) drop-shadow(0 0 5px rgba(255,255,255,0.8)); }
 }
 
-/* Reducir intensidad en móviles */
+/* Reducir intensidad y tamaño en móviles */
 @media (max-width: 520px) {
-  .gold-particle.sparkle { box-shadow: none; filter: drop-shadow(0 0 2px rgba(255,215,0,0.5)); }
+  .gold-particle.sparkle { 
+    box-shadow: none; 
+    filter: drop-shadow(0 0 2px rgba(255,215,0,0.5)); 
+    transform: scale(0.7); /* Reducir tamaño general en móviles */
+  }
+  .gold-particle.dust {
+    transform: scale(0.8);
+  }
 }
 
