@@ -5,6 +5,53 @@
   --inv-overlay: rgba(0, 0, 0, 0.2);
 }
 
+@font-face {
+  font-family: 'ChopinScript';
+  src: url('/fonts/ChopinScript.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mustika';
+  src: url('/fonts/Mustika.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Divisor decorativo entre título y nombre */
+.invitation-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 5px auto 15px;
+  width: 100%;
+  max-width: 38px;
+  opacity: 0.9;
+}
+
+.invitation-divider::before,
+.invitation-divider::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, var(--inv-gold));
+}
+
+.invitation-divider::after {
+  background: linear-gradient(90deg, var(--inv-gold), transparent);
+}
+
+.divider-diamond {
+  width: 8px;
+  height: 8px;
+  background: var(--inv-gold);
+  transform: rotate(45deg);
+  box-shadow: 0 0 8px var(--inv-gold);
+}
+
 body {
   margin: 0;
   background-color: #121212;
@@ -50,12 +97,16 @@ html, body, #root {
 }
 
 .intro-container {
+  width: 100%;
+  height: 100vh;
   text-align: center;
+  justify-content: center;
   animation: fadeIn 1s ease-in;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 30px;
+  position: relative; /* para posicionar las esquinas absolutas dentro del intro */
 }
 
 /* Animación de salida del intro */
@@ -251,43 +302,44 @@ html, body, #root {
 
 /* Marco interno decorativo en modo tarjeta eliminado: ahora el marco está en el contenedor */
 
-/* Esquinas decorativas */
+/* Esquinas decorativas: usamos la imagen /Esquina.png y la volteamos por esquina */
 .corner-decoration {
   position: absolute;
-  width: 40px;
-  height: 40px;
-  border: 4px double var(--inv-gold);
-  transition: all 0.3s ease;
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
   pointer-events: none;
-  z-index: 2;
+  z-index: 6;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.45)) drop-shadow(0 0 8px rgba(212,175,55,0.22));
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
+/* Posicionamiento y volteo por esquina */
 .corner-top-left {
-  top: 20px;
-  left: 20px;
-  border-right: none;
-  border-bottom: none;
+  top: 5px;
+  left: 5px;
+  transform: rotate(90deg);
 }
 
 .corner-top-right {
-  top: 20px;
-  right: 20px;
-  border-left: none;
-  border-bottom: none;
+  top: 5px;
+  right: 5px;
+  /* espejo horizontal para que la esquina apunte hacia dentro */
+  transform: scaleY(-1) scaleX(-1);
 }
 
 .corner-bottom-left {
-  bottom: 20px;
-  left: 20px;
-  border-right: none;
-  border-top: none;
+  bottom: 5px;
+  left: 5px;
+  /* espejo vertical */
+  transform: rotate(0);
 }
 
 .corner-bottom-right {
-  bottom: 20px;
-  right: 20px;
-  border-left: none;
-  border-top: none;
+  bottom: 5px;
+  right: 5px;
+  /* espejo horizontal y vertical */
+  transform: scaleX(-1);
 }
 
 /* Tipografía y contenido */
@@ -325,13 +377,45 @@ html, body, #root {
 }
 
 .invitation-name {
-  font-size: 3.6rem;
+  font-size: 4rem;
   margin: 0;
-  font-family: 'Wedding', 'Great Vibes', cursive, serif;
+  font-family: 'ChopinScript', cursive, serif;
   color: var(--inv-gold);
-  letter-spacing: 2px;
+  letter-spacing: 4px;
   text-shadow: 0 0 12px rgba(212,175,55,0.45), 2px 2px 4px rgba(0,0,0,0.6);
-  animation: nameGlow 4s ease-in-out infinite;
+  /*animation: nameGlow 4s ease-in-out infinite;*/
+}
+
+/* Divisor decorativo entre título y nombre */
+.invitation-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 10px auto 20px;
+  width: 100%;
+  max-width: 450px; /* Más ancho */
+  opacity: 0.9;
+}
+
+.invitation-divider::before,
+.invitation-divider::after {
+  content: '';
+  height: 2px; /* Línea un poco más gruesa */
+  flex: 1;
+  background: linear-gradient(90deg, transparent, var(--inv-gold));
+}
+
+.invitation-divider::after {
+  background: linear-gradient(90deg, var(--inv-gold), transparent);
+}
+
+.divider-diamond {
+  width: 14px; /* Diamante más grande */
+  height: 14px;
+  background: var(--inv-gold);
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px var(--inv-gold);
 }
 
 @keyframes nameGlow {
@@ -354,8 +438,7 @@ html, body, #root {
 }
 
 .guest-name {
-  font-family: 'Wedding', 'Great Vibes', cursive, serif;
-  font-size: 2.6rem;
+  font-size: 3.5rem;
   color: var(--inv-gold);
   margin: 0 0 10px;
   letter-spacing: 1px;
@@ -366,7 +449,7 @@ html, body, #root {
 .guest-name .companions {
   display: inline-block;
   margin-left: 10px;
-  font-size: 1rem;
+  font-size: 3.5rem;
   color: #fff7e6;
   background: linear-gradient(90deg, rgba(212,175,55,0.14), rgba(212,175,55,0.06));
   padding: 6px 10px;
@@ -377,27 +460,31 @@ html, body, #root {
 
 .companion-subtitle {
   margin: 6px 0 0;
-  font-size: 1.15rem; /* ligeramente más grande */
+  font-size: 1rem;
   font-weight: 600;
   color: #fffdf0;
   opacity: 0.98;
-  letter-spacing: 0.2px;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .invitation-details-text p {
-  margin: 10px 0;
+  margin: 40px 10px 20px 10px;
   color: #f2f2f2;
   line-height: 1.7;
-  font-size: 1.05rem;
+  font-size: 0.8rem;
   text-align: center; /* centrar la frase de la fecha */
+
 }
 
 /* Estilos específicos para fecha y hora dentro del texto */
 .event-datetime {
-  font-size: 1.08rem;
+  font-size: 5rem;
   color: #fff8ee;
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 .event-datetime .event-date {
   font-weight: 700;
@@ -418,7 +505,8 @@ html, body, #root {
 }
 
 .invitation-subtitle {
-  font-size: 2.5rem;
+  font-family: 'Mustika', sans-serif;
+  font-size: 3.8rem;
   color: var(--inv-gold);
   margin-top: 30px;
   margin-bottom: 15px; /* separar de la lámpara */
@@ -463,10 +551,11 @@ html, body, #root {
   box-shadow: 0 6px 20px rgba(212,175,55,0.25);
 }
 .action-label {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: var(--inv-gold);
   font-weight: 600;
-  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
 /* Estado 'confirmado' visual: botón con fondo dorado y texto en fondo oscuro */
@@ -583,7 +672,7 @@ html, body, #root {
 }
 .details-screen.show {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(-40px) scale(1);
   pointer-events: auto;
   height: auto;
 }
@@ -718,3 +807,70 @@ html, body, #root {
   .map-modal-body { height: 50vh; }
   .map-modal { border-radius: 8px; }
 }
+
+/* ---------------------------
+   Partículas doradas flotantes
+   --------------------------- */
+.golden-particles {
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 4; /* sobre el fondo, debajo de controles importantes */
+}
+
+.gold-particle {
+  position: absolute;
+  bottom: -10vh; /* arrancan más abajo */
+  background: white;
+  transform: translate3d(0,0,0);
+  will-change: transform, opacity;
+  animation-name: floatParticle;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.gold-particle.dust {
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, #ffd700 40%, transparent 80%);
+  box-shadow: 0 0 4px rgba(255, 215, 0, 0.6);
+}
+
+.gold-particle.sparkle {
+  /* Forma de estrella de 4 puntas (destello) */
+  clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
+  background: radial-gradient(circle, #ffffff 20%, #ffd700 100%);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 215, 0, 0.6);
+  /* Animación extra de parpadeo */
+  animation-name: floatParticle, twinkle;
+  animation-duration: inherit; /* float usa la duración aleatoria */
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(0.5);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  50% {
+    transform: translate3d(15px, -55vh, 0) rotate(180deg) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate3d(-20px, -120vh, 0) rotate(360deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.5) drop-shadow(0 0 5px rgba(255,255,255,0.8)); }
+}
+
+/* Reducir intensidad en móviles */
+@media (max-width: 520px) {
+  .gold-particle.sparkle { box-shadow: none; filter: drop-shadow(0 0 2px rgba(255,215,0,0.5)); }
+}
+

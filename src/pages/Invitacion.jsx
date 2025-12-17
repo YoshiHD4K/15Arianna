@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import '../assets/css/invitation.css'
+import GoldenParticles from '../components/GoldenParticles'
 import { useToast } from '../context/ToastContext'
 import { supabase } from '../lib/supabase'
 
@@ -137,6 +138,7 @@ export default function Invitacion() {
 
   return (
     <div className={"invitation-container" + (view === 'invitation' ? " invitation-mode" : "") }>
+      <GoldenParticles />
       {loading ? (
         <div className="loading-text">Cargando...</div>
       ) : view === 'intro' ? (
@@ -149,6 +151,11 @@ export default function Invitacion() {
           <button className="btn-gold" onClick={handleContinue} disabled={introExiting}>
             Continuar
           </button>
+          {/* Esquinas decorativas en la pantalla de intro */}
+          <img src="/Esquina.png" className="corner-decoration corner-top-left" alt="Esquina arriba izquierda" />
+          <img src="/Esquina.png" className="corner-decoration corner-top-right" alt="Esquina arriba derecha" />
+          <img src="/Esquina.png" className="corner-decoration corner-bottom-left" alt="Esquina abajo izquierda" />
+          <img src="/Esquina.png" className="corner-decoration corner-bottom-right" alt="Esquina abajo derecha" />
         </div>
       ) : view === 'parents' ? (
         <div className={"parents-screen" + (parentsExiting ? " parents-exit" : " parents-enter") }>
@@ -156,19 +163,19 @@ export default function Invitacion() {
             <div className="parents-title">Con amor de tus padres</div>
             <ParentsMessage />
           </div>
-          <div className="corner-decoration corner-top-left"></div>
-          <div className="corner-decoration corner-top-right"></div>
-          <div className="corner-decoration corner-bottom-left"></div>
-          <div className="corner-decoration corner-bottom-right"></div>
+          <img src="/Esquina.png" className="corner-decoration corner-top-left" alt="Esquina arriba izquierda" />
+          <img src="/Esquina.png" className="corner-decoration corner-top-right" alt="Esquina arriba derecha" />
+          <img src="/Esquina.png" className="corner-decoration corner-bottom-left" alt="Esquina abajo izquierda" />
+          <img src="/Esquina.png" className="corner-decoration corner-bottom-right" alt="Esquina abajo derecha" />
         </div>
       ) : (
         <div className={"invitation-view card-enter"}>
           <div className="invitation-card" ref={containerRef}>
             {/* Esquinas decorativas dentro de la tarjeta */}
-            <div className="corner-decoration corner-top-left"></div>
-            <div className="corner-decoration corner-top-right"></div>
-            <div className="corner-decoration corner-bottom-left"></div>
-            <div className="corner-decoration corner-bottom-right"></div>
+            <img src="/Esquina.png" className="corner-decoration corner-top-left" alt="Esquina arriba izquierda" />
+            <img src="/Esquina.png" className="corner-decoration corner-top-right" alt="Esquina arriba derecha" />
+            <img src="/Esquina.png" className="corner-decoration corner-bottom-left" alt="Esquina abajo izquierda" />
+            <img src="/Esquina.png" className="corner-decoration corner-bottom-right" alt="Esquina abajo derecha" />
 
             {/* Two separate screens inside the card: cover (header) and details (invitation info) */}
             <div className={"cover-screen " + (invSection === 'cover' ? 'show' : 'hide')}>
@@ -179,7 +186,10 @@ export default function Invitacion() {
                   className="crown-image"
                 />
                 <h1 className="invitation-name">Mis 15 años</h1>
-                <div className={"invitation-subtitle" + (invSection === 'details' ? " header-fade-up" : "")}>Arianna Sofia</div>
+                <div className="invitation-divider">
+                  <div className="divider-diamond"></div>
+                </div>
+                <div className={"invitation-subtitle" + (invSection === 'details' ? " header-fade-up" : "")}>Arianna Sofía</div>
                 <img
                   src="/Diseño_sin_título-removebg-preview.png"
                   alt="Lámpara"
