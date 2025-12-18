@@ -1,5 +1,5 @@
 :root {
-  --inv-bg: #0b3c5d; /* Azul celeste oscuro inspirado en Jazmín */
+  --inv-bg: #1f6b8f; /* Azul celeste más claro y moderno */
   --inv-gold: #d4af37; /* Dorado clásico */
   --inv-text: #ffffff;
   --inv-overlay: rgba(0, 0, 0, 0.2);
@@ -73,8 +73,8 @@ html, body, #root {
   min-height: 100vh;
   min-height: 100dvh; /* mejor en móviles */
   padding: 0; /* evitar overflow vertical por padding del contenedor */
-  /* Fondo con tonos de azul celeste y azul profundo */
-  background: radial-gradient(circle, #144e73 0%, #071d34 60%, #001022 100%);
+  /* Fondo moderno con degradado azul celeste más claro y mágico */
+  background: radial-gradient(circle at 50% 30%, #3ea6d1 0%, #1f6b8f 50%, #0e3a57 100%);
 }
 
 /* Modo invitación a pantalla completa: el contenedor actúa como lienzo con marco */
@@ -606,12 +606,12 @@ html, body, #root {
   width: 10px;
 }
 .invitation-view::-webkit-scrollbar-track {
-  background: linear-gradient(180deg, #071d34 0%, #0b3c5d 60%, #071d34 100%);
+  background: linear-gradient(180deg, #0e3a57 0%, #1f6b8f 60%, #0e3a57 100%);
   border-left: 1px solid rgba(212,175,55,0.25);
 }
 .invitation-view::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #d4af37 0%, #b98e1f 100%);
-  border: 2px solid #071d34;
+  border: 2px solid #0e3a57;
   border-radius: 6px;
   box-shadow: 0 0 6px rgba(212,175,55,0.5);
 }
@@ -621,7 +621,7 @@ html, body, #root {
 /* Firefox */
 .invitation-view {
   scrollbar-width: thin;
-  scrollbar-color: #b98e1f #071d34;
+  scrollbar-color: #b98e1f #0e3a57;
 }
 
 /* Bloque de detalles (body + footer) para revelar tras scroll/click */
