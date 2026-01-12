@@ -26,6 +26,7 @@ export default function Invitacion() {
   const containerRef = useRef(null)
   const [showMapModal, setShowMapModal] = useState(false)
   const [showDetailsModal, setShowDetailsModal] = useState(false)
+  const [openDetailId, setOpenDetailId] = useState(null)
 
   useEffect(() => {
     if (!id) return
@@ -345,33 +346,70 @@ export default function Invitacion() {
         </div>
         <div className="inv-modal-body">
           <div className="detail-list">
-            <div className="detail-item">
-              <div className="detail-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.38 3.4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2 2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2zM4 22h16v-3h-2v-2h2v-3h-2v-2h2V9H4v3h2v2H4v3h2v2H4v3zM8 9h8v8H8V9z"/></svg>
-              </div>
-              <div className="detail-content">
-                <h3>Código de Vestimenta</h3>
-                <p>Formal / Elegante. Queremos verte brillar con nosotros.</p>
-              </div>
-            </div>
-            <div className="detail-item">
-              <div className="detail-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-              </div>
-              <div className="detail-content">
-                <h3>Lluvia de Sobres</h3>
-                <p>Tu presencia es nuestro mejor regalo. Si deseas tener un detalle, agradecemos tu aporte en sobre.</p>
-              </div>
-            </div>
-            <div className="detail-item">
-              <div className="detail-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </div>
-              <div className="detail-content">
-                <h3>Puntualidad</h3>
-                <p>Agradecemos tu puntualidad para disfrutar juntos de cada momento de la celebración.</p>
+            
+            {/* Código de Vestimenta */}
+            <div className={`detail-accordion ${openDetailId === 'dresscode' ? 'open' : ''}`}>
+              <button 
+                className="detail-accordion-header" 
+                onClick={() => setOpenDetailId(openDetailId === 'dresscode' ? null : 'dresscode')}
+              >
+                <div className="detail-accordion-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.38 3.4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2 2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2zM4 22h16v-3h-2v-2h2v-3h-2v-2h2V9H4v3h2v2H4v3h2v2H4v3zM8 9h8v8H8V9z"/></svg>
+                </div>
+                <h3 className="detail-accordion-title">Código de Vestimenta</h3>
+                <div className="detail-accordion-arrow">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </button>
+              <div className="detail-accordion-content">
+                <div className="detail-accordion-inner">
+                  <p>Formal / Elegante. Queremos verte brillar con nosotros. Se sugiere traje oscuro para caballeros y vestido largo para damas.</p>
+                </div>
               </div>
             </div>
+
+            {/* Lluvia de Sobres */}
+            <div className={`detail-accordion ${openDetailId === 'gift' ? 'open' : ''}`}>
+              <button 
+                className="detail-accordion-header" 
+                onClick={() => setOpenDetailId(openDetailId === 'gift' ? null : 'gift')}
+              >
+                <div className="detail-accordion-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                </div>
+                <h3 className="detail-accordion-title">Lluvia de Sobres</h3>
+                <div className="detail-accordion-arrow">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </button>
+              <div className="detail-accordion-content">
+                <div className="detail-accordion-inner">
+                  <p>Tu presencia es nuestro mejor regalo. Si deseas tener un detalle con la quinceañera, agradecemos tu aporte en sobre el día del evento.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Puntualidad */}
+            <div className={`detail-accordion ${openDetailId === 'time' ? 'open' : ''}`}>
+              <button 
+                className="detail-accordion-header" 
+                onClick={() => setOpenDetailId(openDetailId === 'time' ? null : 'time')}
+              >
+                <div className="detail-accordion-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <h3 className="detail-accordion-title">Puntualidad</h3>
+                <div className="detail-accordion-arrow">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </button>
+              <div className="detail-accordion-content">
+                <div className="detail-accordion-inner">
+                  <p>Agradecemos tu puntualidad para disfrutar juntos de cada momento de la celebración. La recepción comenzará a la hora indicada en la invitación.</p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
         <div className="inv-modal-footer">
