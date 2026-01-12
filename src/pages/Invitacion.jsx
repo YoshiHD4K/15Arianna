@@ -68,6 +68,17 @@ export default function Invitacion() {
           aceptado: !!data.accepted,
           created_at: data.created_at,
         })
+
+        // Marcar como visto si aún no lo está
+        if (!data.view) {
+          supabase
+            .from('invitations')
+            .update({ view: true })
+            .eq('id', id)
+            .then(({ error }) => {
+              if (error) console.error('Error al marcar visto:', error)
+            })
+        }
       } catch (err) {
         console.error(err)
         toast.add({ title: 'Error', message: err.message ?? 'Error al cargar', type: 'error' })
@@ -123,11 +134,34 @@ export default function Invitacion() {
   }
 
   // Acciones para los nuevos botones
-  function handleConfirmClick() {
-    // marcar en UI como aceptado (local) y emitir log; idealmente aquí se llamaría a supabase
-    setInv(prev => prev ? { ...prev, aceptado: true } : prev)
-    console.log('Confirmar asistencia')
-    toast.add({ title: 'Confirmado', message: 'Gracias por confirmar tu asistencia', type: 'success' })
+  async function handleConfirmClick() {
+    if (!inv) return
+    const newStatus = !inv.aceptado
+
+    // Actualización optimista
+    setInv(prev => ({ ...prev, aceptado: newStatus }))
+
+    try {
+      const { error } = await supabase
+        .from('invitations')
+        .update({ accepted: newStatus })
+        .eq('id', id)
+
+      if (error) {
+        // Revertir si falla
+        setInv(prev => ({ ...prev, aceptado: !newStatus }))
+        throw error
+      }
+
+      if (newStatus) {
+        toast.add({ title: 'Confirmado', message: 'Gracias por confirmar tu asistencia', type: 'success' })
+      } else {
+        toast.add({ title: 'Pendiente', message: 'Has cancelado tu confirmación', type: 'info' })
+      }
+    } catch (err) {
+      console.error(err)
+      toast.add({ title: 'Error', message: 'No se pudo actualizar', type: 'error' })
+    }
   }
 
   function handleOpenMap() {
