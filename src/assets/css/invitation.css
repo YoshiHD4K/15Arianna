@@ -1,5 +1,5 @@
 :root {
-  --inv-bg: #1f6b8f; /* Azul celeste más claro y moderno */
+  --inv-bg: #6c3483; /* Morado elegante */
   --inv-gold: #d4af37; /* Dorado clásico */
   --inv-text: #ffffff;
   --inv-overlay: rgba(0, 0, 0, 0.2);
@@ -73,8 +73,8 @@ html, body, #root {
   min-height: 100vh;
   min-height: 100dvh; /* mejor en móviles */
   padding: 0; /* evitar overflow vertical por padding del contenedor */
-  /* Fondo moderno con degradado azul celeste más claro y mágico */
-  background: radial-gradient(circle at 50% 30%, #3ea6d1 0%, #1f6b8f 50%, #0e3a57 100%);
+  /* Fondo moderno con degradado morado mágico */
+  background: radial-gradient(circle at 50% 30%, #a569bd 0%, #6c3483 50%, #2e1142 100%);
 }
 
 /* Modo invitación a pantalla completa: el contenedor actúa como lienzo con marco */
@@ -606,12 +606,12 @@ html, body, #root {
   width: 10px;
 }
 .invitation-view::-webkit-scrollbar-track {
-  background: linear-gradient(180deg, #0e3a57 0%, #1f6b8f 60%, #0e3a57 100%);
+  background: linear-gradient(180deg, #2e1142 0%, #6c3483 60%, #2e1142 100%);
   border-left: 1px solid rgba(212,175,55,0.25);
 }
 .invitation-view::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #d4af37 0%, #b98e1f 100%);
-  border: 2px solid #0e3a57;
+  border: 2px solid #2e1142;
   border-radius: 6px;
   box-shadow: 0 0 6px rgba(212,175,55,0.5);
 }
@@ -621,7 +621,7 @@ html, body, #root {
 /* Firefox */
 .invitation-view {
   scrollbar-width: thin;
-  scrollbar-color: #b98e1f #0e3a57;
+  scrollbar-color: #b98e1f #2e1142;
 }
 
 /* Bloque de detalles (body + footer) para revelar tras scroll/click */
@@ -768,7 +768,7 @@ html, body, #root {
 .inv-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(46, 17, 66, 0.75); /* Morado muy oscuro */
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
@@ -779,7 +779,7 @@ html, body, #root {
 }
 
 .inv-modal {
-  background: rgba(15, 30, 45, 0.95);
+  background: rgba(46, 17, 66, 0.95); /* Fondo modal #2e1142 dark purple */
   border: 1px solid var(--inv-gold);
   box-shadow: 0 0 40px rgba(212, 175, 55, 0.15), 0 20px 60px rgba(0,0,0,0.6);
   border-radius: 16px;
