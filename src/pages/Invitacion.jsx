@@ -278,7 +278,7 @@ export default function Invitacion() {
                     if (companions === null) {
                       companionSubtitle = ''
                     } else if (companions === 0) {
-                      companionSubtitle = 'sin acompañantes'
+                      companionSubtitle = ''
                     } else if (companions === 1) {
                       companionSubtitle = 'junto a 1 invitado'
                     } else {
@@ -293,7 +293,7 @@ export default function Invitacion() {
                   })()}
                   <div className="invitation-details-text">
                     <p className="event-datetime">
-                      Te esperamos el<span className="event-date">28 de febrero del 2026</span>a las<span className="event-time">8:00 p.m.</span>
+                      <span className="event-date">Febrero</span><br/>Sabado <span className="event-day">(28)</span><span className="event-time">8:00 p.m.</span>
                     </p>
                   </div>
               </div>
@@ -401,7 +401,7 @@ export default function Invitacion() {
               </button>
               <div className="detail-accordion-content">
                 <div className="detail-accordion-inner">
-                  <p>Formal / Elegante. Queremos verte brillar con nosotros. Se sugiere traje oscuro para caballeros y vestido largo para damas.</p>
+                  <p>Semiformal (No Jeans, no zapatos deportivos, se reserva el color azul turquesa para la homenajeada).</p>
                 </div>
               </div>
             </div>
@@ -415,14 +415,14 @@ export default function Invitacion() {
                 <div className="detail-accordion-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
                 </div>
-                <h3 className="detail-accordion-title">Lluvia de Sobres</h3>
+                <h3 className="detail-accordion-title">Obsequios</h3>
                 <div className="detail-accordion-arrow">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
               </button>
               <div className="detail-accordion-content">
                 <div className="detail-accordion-inner">
-                  <p>Tu presencia es nuestro mejor regalo. Si deseas tener un detalle con la quinceañera, agradecemos tu aporte en sobre el día del evento.</p>
+                  <p>Lluvia de sobres</p>
                 </div>
               </div>
             </div>
@@ -436,14 +436,14 @@ export default function Invitacion() {
                 <div className="detail-accordion-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 </div>
-                <h3 className="detail-accordion-title">Puntualidad</h3>
+                <h3 className="detail-accordion-title">Cronograma</h3>
                 <div className="detail-accordion-arrow">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
               </button>
               <div className="detail-accordion-content">
                 <div className="detail-accordion-inner">
-                  <p>Agradecemos tu puntualidad para disfrutar juntos de cada momento de la celebración. La recepción comenzará a la hora indicada en la invitación.</p>
+                  <p>La magia inicia a las 9:00 PM, con la salida de la quinceañera</p>
                 </div>
               </div>
             </div>

@@ -85,6 +85,8 @@ html, body, #root {
   padding: 0; /* sin márgenes para aprovechar todo el ancho/alto */
 }
 
+
+
 .invitation-mode::before {
   content: '';
   position: absolute;
@@ -506,6 +508,7 @@ html, body, #root {
 
 /* Estilos específicos para fecha y hora dentro del texto */
 .event-datetime {
+  font-family: 'Times New Roman', serif;
   font-size: clamp(1.5rem, 4vw, 5rem); /* Ajuste drástico para móviles */
   color: #fff8ee;
   font-weight: 500;
@@ -520,6 +523,16 @@ html, body, #root {
   color: var(--inv-gold);
   margin: 0 6px;
 }
+
+.event-datetime .event-day {
+  font-size: 2.3em; /* Significativamente más grande que el texto base */
+  font-weight: bold;
+  color: var(--inv-gold);
+  text-shadow: 0 0 15px rgba(212,175,55,0.6);
+  vertical-align: middle;
+  margin: 0 4px;
+}
+
 .event-datetime .event-time {
   font-weight: 700;
   color: #ffd985; /* tono dorado suave */
