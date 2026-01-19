@@ -38,7 +38,7 @@ export default function Invitacion() {
       try {
         const { data, error } = await supabase
           .from('invitations')
-          .select('id, names, participants, view, accepted, created_at')
+          .select('id, names, participants, view, accepted, created_at, isvirtual')
           .eq('id', id)
           .maybeSingle()
 
@@ -69,6 +69,7 @@ export default function Invitacion() {
           visto: !!data.view,
           aceptado: !!data.accepted,
           created_at: data.created_at,
+          isVirtual: !!data.isvirtual,
         })
 
         // Marcar como visto si aún no lo está
@@ -313,48 +314,72 @@ export default function Invitacion() {
               <div className="invitation-footer">
                 <div className="invitation-actions" role="group" aria-label="Acciones de invitación">
                   <div className="action-button">
-                    <button
-                      className="action-btn"
-                      onClick={handleConfirmClick}
-                      aria-pressed={!!inv?.aceptado}
-                      title="Confirmar asistencia"
-                    >
-                      {/* Check icon */}
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                        <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </button>
-                    <div className="action-label">{inv?.aceptado ? 'Confirmado' : 'Confirmar'}</div>
+                    {inv?.isVirtual ? (
+                      <>
+                        <button
+                          className="action-btn"
+                          disabled
+                          title="En vivo"
+                          style={{ opacity: 0.8, cursor: 'default' }}
+                        >
+                          {/* Camera Icon */}
+                          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                            <circle cx="12" cy="13" r="3"/>
+                          </svg>
+                        </button>
+                        <div className="action-label">En vivo</div>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          className="action-btn"
+                          onClick={handleConfirmClick}
+                          aria-pressed={!!inv?.aceptado}
+                          title="Confirmar asistencia"
+                        >
+                          {/* Check icon */}
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                            <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </button>
+                        <div className="action-label">{inv?.aceptado ? 'Confirmado' : 'Confirmar'}</div>
+                      </>
+                    )}
                   </div>
 
-                  <div className="action-button">
-                    <button
-                      className="action-btn"
-                      onClick={handleOpenMap}
-                      title="Lugar"
-                    >
-                      {/* Map pin icon */}
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                        <circle cx="12" cy="10" r="2.5" fill="currentColor" />
-                      </svg>
-                    </button>
-                    <div className="action-label">Lugar</div>
-                  </div>
+                  {!inv?.isVirtual && (
+                    <>
+                      <div className="action-button">
+                        <button
+                          className="action-btn"
+                          onClick={handleOpenMap}
+                          title="Lugar"
+                        >
+                          {/* Map pin icon */}
+                          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                            <circle cx="12" cy="10" r="2.5" fill="currentColor" />
+                          </svg>
+                        </button>
+                        <div className="action-label">Lugar</div>
+                      </div>
 
-                  <div className="action-button">
-                    <button
-                      className="action-btn"
-                      onClick={handleOpenDetails}
-                      title="Detalles"
-                    >
-                      {/* Dots / list icon */}
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                        <path d="M5 6h14M5 12h14M5 18h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </button>
-                    <div className="action-label">Detalles</div>
-                  </div>
+                      <div className="action-button">
+                        <button
+                          className="action-btn"
+                          onClick={handleOpenDetails}
+                          title="Detalles"
+                        >
+                          {/* Dots / list icon */}
+                          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                            <path d="M5 6h14M5 12h14M5 18h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </button>
+                        <div className="action-label">Detalles</div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
