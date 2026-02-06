@@ -19,7 +19,6 @@ export default function Sorteo() {
       const { data, error: err } = await supabase
         .from('invitations')
         .select('table')
-        .neq('table', '7') // Excluir mesa 7 explícitamente desde la query si es posible, aunque también filtraremos en JS
         .not('table', 'is', null)
 
       if (err) throw err
